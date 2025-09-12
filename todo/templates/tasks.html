@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block start %}
+
+<p>{{task.title}}</p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Descriptions</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{task.title}}</td>
+      <td>{{task.task_description}}</td>
+      <td>{{task.completed}}</td>
+      <td><a href="/delete_task/{{task.id}}" type="submit" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <a href="{% url 'add_task' %}" type="submit" class="btn btn-primary">ADD Task</a>
+</table>
+{% endblock %}
