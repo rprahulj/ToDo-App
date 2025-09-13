@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container mt-5">
+<form class="col-6 mx-auto card p-3 shadow-lg" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="title" class="col-form-label">Update TO DO Title</label>
+      <div class="col-lg-10">
+        <input type="text" name="title" class="form-control form-control-lg" value="{{task.title}}" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="task_description" class="col-form-label">Update Task Description</label>
+      <div class="form-group">
+        <textarea name="task_description" class="form-control form-control-lg">{{task.task_description}}</textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Task</button>
+</form>
+</div>
+
+{% endblock %}
