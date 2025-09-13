@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% block start %}
 
-<p>{{task.title}}</p>
-
+<div class="container">
 <table class="table table-bordered">
+  <div class="row">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -15,14 +15,27 @@
   <tbody>
     {% for task in tasks %}
     <tr>
-      <th scope="row">{{ forloop.counter }}</th>
+      <td scope="row">{{ forloop.counter }}</td>
       <td>{{task.title}}</td>
       <td>{{task.task_description}}</td>
-      <td>{{task.completed}}</td>
-      <td><a href="/delete_task/{{task.id}}" type="submit" class="btn btn-danger">Delete</a></td>
+      {% if task.completed == False %}
+        <td>Completed</td>
+      {% else %}
+        <td>Do Fast</td>
+      {% endif %}
+      <td><a href="/delete_task/{{task.id}}" type="submit" class="btn btn-danger">Delete</a>
+        {% if task.completed == False %}
+          <a href="/mark_task/{{task.id}}" type="submit" class="btn btn-success">✅</a>
+        {% else %}
+          <a href="/unmark_task/{{task.id}}" type="submit" class="btn btn-danger">❌</a>
+        {% endif %}
+        <a href="/update_task/{{task.id}}" type="submit" class="btn btn-primary">Update</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
-  <a href="{% url 'add_task' %}" type="submit" class="btn btn-primary">ADD Task</a>
+  <a href="{% url 'add_task' %}" type="submit" class="btn btn-primary my-4">ADD Task</a>
+  </div>
 </table>
+</div>
 {% endblock %}
